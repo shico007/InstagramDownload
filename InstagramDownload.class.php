@@ -72,7 +72,7 @@ class InstagramDownload {
       $url = $this->input_url;
     }
     $url = parse_url($url);
-    if (empty($url)) {
+    if (empty($url['host'])) {
       $this->error_code = -1;
       return FALSE;
     }
