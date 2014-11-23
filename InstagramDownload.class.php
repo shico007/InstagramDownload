@@ -106,7 +106,10 @@ class InstagramDownload {
     curl_setopt($curl, CURLOPT_TIMEOUT, 15);
     curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
     curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-    curl_setopt($curl, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);
+    if (!empty($_SERVER['HTTP_USER_AGENT'])) {
+      curl_setopt($curl, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);
+    }
+    
 
     $response = curl_exec($curl);
 
@@ -146,9 +149,9 @@ class InstagramDownload {
       }
     }
 
-    if (empty($page->meta_values)) { return false; }
+    if (empty($this->meta_values)) { return false; }
 
-    return $page;
+    return $this->meta_values;
   }
 
   public function getError() {
